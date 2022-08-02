@@ -12,6 +12,8 @@ public class PieEntry extends Entry {
 
     private String label;
 
+    private Boolean drawLabel;
+
     public PieEntry(float value) {
         super(0f, value);
     }
@@ -28,24 +30,28 @@ public class PieEntry extends Entry {
         super(0f, value, icon, data);
     }
 
-    public PieEntry(float value, String label) {
+    public PieEntry(float value, String label, boolean drawEntry) {
         super(0f, value);
         this.label = label;
+        this.drawLabel = drawEntry;
     }
 
-    public PieEntry(float value, String label, Object data) {
+    public PieEntry(float value, String label, boolean drawEntry, Object data) {
         super(0f, value, data);
         this.label = label;
+        this.drawLabel = drawEntry;
     }
 
-    public PieEntry(float value, String label, Drawable icon) {
+    public PieEntry(float value, String label, boolean drawEntry, Drawable icon) {
         super(0f, value, icon);
         this.label = label;
+        this.drawLabel = drawEntry;
     }
 
-    public PieEntry(float value, String label, Drawable icon, Object data) {
+    public PieEntry(float value, String label, boolean drawEntry, Drawable icon, Object data) {
         super(0f, value, icon, data);
         this.label = label;
+        this.drawLabel = drawEntry;
     }
 
     /**
@@ -65,6 +71,14 @@ public class PieEntry extends Entry {
         this.label = label;
     }
 
+    public Boolean getDrawEntry() {
+        return drawLabel;
+    }
+
+    public void setDrawEntry(Boolean drawLabel) {
+        this.drawLabel = drawLabel;
+    }
+
     @Deprecated
     @Override
     public void setX(float x) {
@@ -80,7 +94,7 @@ public class PieEntry extends Entry {
     }
 
     public PieEntry copy() {
-        PieEntry e = new PieEntry(getY(), label, getData());
+        PieEntry e = new PieEntry(getY(), label, drawLabel, getData());
         return e;
     }
 }

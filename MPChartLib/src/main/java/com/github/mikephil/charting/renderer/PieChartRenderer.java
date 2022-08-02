@@ -14,6 +14,7 @@ import android.os.Build;
 import android.text.Layout;
 import android.text.StaticLayout;
 import android.text.TextPaint;
+import android.util.Log;
 
 import com.github.mikephil.charting.animation.ChartAnimator;
 import com.github.mikephil.charting.charts.LineChart;
@@ -506,13 +507,13 @@ public class PieChartRenderer extends DataRenderer {
                 final float sliceXBase = (float) Math.cos(transformedAngle * Utils.FDEG2RAD);
                 final float sliceYBase = (float) Math.sin(transformedAngle * Utils.FDEG2RAD);
 
-                final boolean drawXOutside = drawEntryLabels &&
+                final boolean drawXOutside = drawEntryLabels && entry.getDrawEntry() &&
                         xValuePosition == PieDataSet.ValuePosition.OUTSIDE_SLICE;
-                final boolean drawYOutside = drawValues &&
+                final boolean drawYOutside = drawValues && entry.getDrawEntry() &&
                         yValuePosition == PieDataSet.ValuePosition.OUTSIDE_SLICE;
-                final boolean drawXInside = drawEntryLabels &&
+                final boolean drawXInside = drawEntryLabels && entry.getDrawEntry() &&
                         xValuePosition == PieDataSet.ValuePosition.INSIDE_SLICE;
-                final boolean drawYInside = drawValues &&
+                final boolean drawYInside = drawValues && entry.getDrawEntry() &&
                         yValuePosition == PieDataSet.ValuePosition.INSIDE_SLICE;
 
                 if (drawXOutside || drawYOutside) {
@@ -1051,7 +1052,7 @@ public class PieChartRenderer extends DataRenderer {
     }
 
     /**
-     * Releases the drawing bitmap. This should be called when {@link LineChart#onDetachedFromWindow()}.
+     * Releases the drawing bitmap. This should be called when {LineChart#onDetachedFromWindow()}.
      */
     public void releaseBitmap() {
         if (mBitmapCanvas != null) {
